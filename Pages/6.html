@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Rouge+Script&display=swap" rel="stylesheet">
+  <link rel="icon" href="https://www.citypng.com/public/uploads/preview/hd-pink-hand-sketch-heart-love-png-735811697025575st8junchot.png" type="image/x-icon">
+  <title>Reel Player</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Rouge Script', cursive, 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, lavender, #e1bee7);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 2rem;
+      text-align: center;
+      margin: 10px 20px;
+      line-height: 1.2;
+      color: #4a148c;
+      word-wrap: break-word;
+    }
+
+    @keyframes fadeSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .reel-container {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+      padding: 20px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .card {
+      width: 306px;
+      height: 480px;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+
+    .inner-card {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.8s;
+    }
+
+    .card.flipped .inner-card {
+      transform: rotateY(180deg);
+    }
+
+    .card-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-front {
+      background-color: #ce93d8;
+      font-size: 2em;
+    }
+
+    .card-back {
+      background-color: #7e57c2;
+      transform: rotateY(180deg);
+      overflow: hidden;
+    }
+
+    video {
+      width: 100%;
+      height: 100%;
+      border-radius: 15px;
+      object-fit: cover;
+    }
+
+    .controls {
+      margin-top: 20px;
+      display: flex;
+      gap: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      background-color: #8e24aa;
+      color: white;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #6a1b9a;
+    }
+
+    /* Lavender flower rain */
+    .flower {
+      position: fixed;
+      top: -50px;
+      width: 24px;
+      height: 24px;
+      background-image: url('https://cdn-icons-png.flaticon.com/512/765/765545.png');
+      background-size: cover;
+      animation: fall linear infinite;
+      opacity: 0.8;
+      z-index: 999;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-50px);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(110vh);
+        opacity: 0;
+      }
+    }
+
+    .next-button {
+      background-color: #976bb6;
+      color: #f9f9f9;
+      border: none;
+      border-radius: 25px;
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .next-button:hover {
+      background-color: #c9ada7;
+      transform: scale(1.05);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1200px) {
+      .reel-container {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    @media (max-width: 992px) {
+      .reel-container {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      .card {
+        width: 234px;
+        height: 380px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .reel-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      h1 {
+        font-size: 1.6rem;
+      }
+
+      .card {
+        width: 195px;
+        height: 335px;
+      }
+
+      .next-button {
+        font-size: 1rem;
+        padding: 12px 24px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .reel-container {
+        grid-template-columns: 1fr;
+        padding: 10px;
+      }
+
+      h1 {
+        font-size: 1.4rem;
+        margin: 5px;
+      }
+
+      .card {
+        width: 100%;
+        height: 270px;
+      }
+
+      .next-button {
+        font-size: 0.9rem;
+        padding: 10px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Madamji apko reel bhejne ki himmat nahi thi toh,<br>bas save kar li aur socha ek din dikhunga</h1>
+  <div class="reel-container">
+    <div class="card" onclick="flipAndPlay(this)">
+      <div class="inner-card">
+        <div class="card-face card-front">🎬</div>
+        <div class="card-face card-back">
+          <video src="video1.mp4" unmute></video>
+        </div>
+      </div>
+    </div>
+    <div class="card" onclick="flipAndPlay(this)">
+      <div class="inner-card">
+        <div class="card-face card-front">🎬</div>
+        <div class="card-face card-back">
+          <video src="video2.mp4" unmute></video>
+        </div>
+      </div>
+    </div>
+    <div class="card" onclick="flipAndPlay(this)">
+      <div class="inner-card">
+        <div class="card-face card-front">🎬</div>
+        <div class="card-face card-back">
+          <video src="video3.mp4" unmute></video>
+        </div>
+      </div>
+    </div>
+    <div class="card" onclick="flipAndPlay(this)">
+      <div class="inner-card">
+        <div class="card-face card-front">🎬</div>
+        <div class="card-face card-back">
+          <video src="video4.mp4" unmute></video>
+        </div>
+      </div>
+    </div>
+    <div class="card" onclick="flipAndPlay(this)">
+      <div class="inner-card">
+        <div class="card-face card-front">🎬</div>
+        <div class="card-face card-back">
+          <video src="video5.mp4" unmute></video>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <button class="next-button" onclick="nextPage()">Click Here</button>
+  <script>
+    function flipAndPlay(card) {
+      const wasFlipped = card.classList.contains('flipped');
+
+      // Stop all other videos and unflip other cards
+      document.querySelectorAll('.card').forEach(c => {
+        if (c !== card) {
+          c.classList.remove('flipped');
+          const video = c.querySelector('video');
+          if (video) video.pause();
+        }
+      });
+
+      // Flip and play the selected card
+      if (!wasFlipped) {
+        card.classList.add('flipped');
+        const video = card.querySelector('video');
+        if (video) video.play();
+      } else {
+        card.classList.remove('flipped');
+        const video = card.querySelector('video');
+        if (video) video.pause();
+      }
+    }
+
+    function createFlowers(count) {
+      for (let i = 0; i < count; i++) {
+        const flower = document.createElement('div');
+        flower.className = 'flower';
+        flower.style.left = Math.random() * 100 + 'vw';
+        flower.style.animationDuration = 5 + Math.random() * 5 + 's';
+        flower.style.animationDelay = Math.random() * 5 + 's';
+        document.body.appendChild(flower);
+      }
+    }
+
+    createFlowers(20); // Create 20 flowers
+
+    function nextPage() {
+      window.location.href = '7.html'; // Redirect to the next page
+    }
+  </script>
+</body>
+</html>

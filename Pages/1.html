@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Love Message</title>
+  <link rel="icon" href="https://www.citypng.com/public/uploads/preview/hd-pink-hand-sketch-heart-love-png-735811697025575st8junchot.png" type="image/x-icon"> 
+  <style>
+    body {
+      background-color: #e6e6fa;
+      font-family: 'Arial', sans-serif;
+      color: #4a4e69;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .container {
+      text-align: center;
+      z-index: 1;
+    }
+
+    h1, p {
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: fadeInUp 1s forwards;
+    }
+
+    h1 {
+      animation-delay: 0.5s;
+      font-size: 3rem;
+    }
+
+    p {
+      animation-delay: 1s;
+      font-size: 1.5rem;
+    }
+
+    .next-button {
+      background-color: #9a8c98;
+      color: #ffffff;
+      border: none;
+      border-radius: 25px;
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .next-button:hover {
+      background-color: #c9ada7;
+      transform: scale(1.05);
+    }
+
+    .hidden-message {
+      display: none;
+      margin-top: 20px;
+      color: white;
+      background-color: #22223b;
+      padding: 20px;
+      border-radius: 10px;
+      animation: fadeIn 1s forwards;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .rain {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .drop {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.6);
+      width: 2px;
+      height: 20px;
+      bottom: 100%;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(100vh);
+      }
+    }
+
+    @media (max-width: 768px) {
+      h1 { font-size: 2rem; }
+      p { font-size: 1.2rem; }
+      .next-button { padding: 12px 25px; font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="rain"></div>
+  <div class="container">
+    <h1 class="animated-text">I want to tell you something</h1>
+    <p class="animated-text">There’s a girl I truly love…</p>
+    <button class="next-button" id="revealButton">Reveal Message</button>
+    <div class="hidden-message" id="hiddenMessage">
+      <p>She makes my heart smile in ways I never knew possible.<br>
+      Maybe you know her... or maybe, <b>it’s been you all along</b>. 💜</p>      
+        <button class="next-button" onclick="handelnextbuttons()">Reveal Name</button>          
+    </div>
+  </div>
+  <script>
+    document.getElementById('revealButton').addEventListener('click', function () {
+      const hiddenMessage = document.getElementById('hiddenMessage');
+      hiddenMessage.style.display = 'block';
+      hiddenMessage.style.animation = 'fadeIn 1s forwards';
+    });
+    function handelnextbuttons(){
+      window.location.href = "2.html";
+    }
+
+    // Rain effect
+    function createRain() {
+      const rainContainer = document.querySelector('.rain');
+      for (let i = 0; i < 100; i++) {
+        const drop = document.createElement('div');
+        drop.className = 'drop';
+        drop.style.left = Math.random() * 100 + 'vw';
+        drop.style.height = Math.random() * 10 + 10 + 'px';
+        drop.style.animationDuration = (Math.random() * 2 + 0.5).toFixed(2) + 's';
+        drop.style.opacity = Math.random();
+        rainContainer.appendChild(drop);
+      }
+    }
+    createRain();
+  </script>
+</body>
+</html>

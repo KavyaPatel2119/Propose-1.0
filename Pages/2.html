@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Matching Game</title>
+    <link rel="icon" href="https://www.citypng.com/public/uploads/preview/hd-pink-hand-sketch-heart-love-png-735811697025575st8junchot.png" type="image/x-icon"> 
+    
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #967bb6, #feb47b);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .game-container {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            animation: slideIn 0.5s ease-in-out;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        h1 {
+            color: #ff4c4c;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            animation: bounce 1s infinite alternate;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(4, 100px);
+            gap: 10px;
+            margin: 20px auto;
+        }
+
+        .card {
+            width: 100px;
+            height: 100px;
+            background-color: #ff6b81;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            border: 2px solid #fff;
+            border-radius: 10px;
+            transition: transform 0.2s, background-color 0.3s;
+            font-size: 24px;
+            color: transparent;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            background-color: #ff4c4c;
+        }
+
+        .card.flipped {
+            color: #fff;
+            background-color: #ff4c4c;
+            animation: flip 0.5s forwards;
+        }
+
+        @keyframes flip {
+            0% { transform: rotateY(0); }
+            50% { transform: rotateY(90deg); }
+            100% { transform: rotateY(0); }
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #ff6b81;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #ff4c4c;
+            transform: scale(1.05);
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>Make My Heart Smile!</h1>
+        <div id="game-board" class="game-board"></div>
+        <button id="resetGame">Reset Game</button>
+    </div>
+    <script>
+        const gameBoard = document.getElementById('game-board');
+        const resetButton = document.getElementById('resetGame');
+
+        const cardValues = ['❤️', '❤️', '💖', '💖', '💘', '💘', '💝', '💝'];
+        let cardElements = [];
+        let firstCard, secondCard;
+        let lockBoard = false;
+        let matchedPairs = 0;
+
+        // Shuffle the card values
+        function shuffle(array) {
+            return array.sort(() => Math.random() - 0.5);
+        }
+
+               // Create the game board
+               function createBoard() {
+            const shuffledValues = shuffle(cardValues);
+            shuffledValues.forEach(value => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.dataset.value = value;
+                card.addEventListener('click', flipCard);
+                gameBoard.appendChild(card);
+                cardElements.push(card);
+            });
+        }
+
+        // Flip the card
+        function flipCard() {
+            if (lockBoard || this === firstCard) return;
+
+            this.classList.add('flipped');
+            this.textContent = this.dataset.value;
+
+            if (!firstCard) {
+                firstCard = this;
+                return;
+            }
+
+            secondCard = this;
+            lockBoard = true;
+
+            checkForMatch();
+        }
+
+        // Check for a match
+        function checkForMatch() {
+            const isMatch = firstCard.dataset.value === secondCard.dataset.value;
+
+            isMatch ? disableCards() : unflipCards();
+        }
+
+        // Disable matched cards
+        function disableCards() {
+            matchedPairs++;
+            resetBoard();
+
+            if (matchedPairs === cardValues.length / 2) {
+                setTimeout(() => {
+                    alert("You’ve matched all the hearts 💖\nJust like mine… waiting to match with yours.\nNow you’re just one click away from seeing the name that lives in my heart...");
+
+                    window.location.href = '3.html'; // Redirect to the congratulations page
+                }, 1000);
+            }
+        }
+
+        // Unflip cards if they don't match
+        function unflipCards() {
+            setTimeout(() => {
+                firstCard.classList.remove('flipped');
+                secondCard.classList.remove('flipped');
+                firstCard.textContent = '';
+                secondCard.textContent = '';
+                resetBoard();
+            }, 1000);
+        }
+
+        // Reset the board
+        function resetBoard() {
+            [firstCard, secondCard, lockBoard] = [null, null, false];
+        }
+
+        // Reset the game
+        resetButton.addEventListener('click', () => {
+            gameBoard.innerHTML = '';
+            cardElements = [];
+            matchedPairs = 0;
+            createBoard();
+        });
+
+        // Initialize the game
+        createBoard();
+    </script>
+</body>
+</html>

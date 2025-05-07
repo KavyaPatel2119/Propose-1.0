@@ -1,0 +1,103 @@
+body {
+    
+    background: linear-gradient(to right, #e6e6fa, #d8bfd8); /* Lavender gradient */
+    font-family: 'Arial', sans-serif;
+    color: #4b0082; /* Darker shade for text */
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* Full height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: backgroundAnimation 10s infinite alternate; /* Background animation */
+}
+
+
+.container {
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    animation: fadeIn 2s;
+}
+
+.shayari-box {
+    background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+    border: 2px solid #4b0082; /* Dark purple border */
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5); /* Enhanced shadow effect */
+    max-width: 600px; /* Max width for the box */
+    margin: 0 auto; /* Center the box */
+    animation: boxAnimation 1s ease-in-out; /* Box animation */
+}
+
+.shayari {
+    font-family: 'Kalam', cursive;
+    font-size: 1.8rem;
+    color: #4b0082; /* Darker shade for text */
+    margin: 30px;
+    animation: fadeShayari 1s ease-in-out;
+}
+.shayari {
+    font-family: 'Kalam', cursive;
+    font-size: 1.8rem;
+    color: #3e3e3e;
+    padding: 20px;
+    background: #f7e1f5;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+
+@keyframes fadeShayari {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+button {
+    padding: 10px 20px;
+    font-size: 1.2em;
+    background-color: #9370db; /* Lavender button color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s; /* Added transform transition */
+    animation: buttonAnimation 1s ease-in-out; /* Button animation */
+}
+
+button:hover {
+    background-color: #7a68b1; /* Darker lavender on hover */
+    transform: scale(1.1); /* Scale effect on hover */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes boxAnimation {
+    0% { transform: scale(0.95); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes buttonAnimation {
+    0% { transform: translateY(10px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes backgroundAnimation {
+    0% { background: linear-gradient(to right, #e6e6fa, #d8bfd8); }
+    100% { background: linear-gradient(to right, #d8bfd8, #e6e6fa); }
+}

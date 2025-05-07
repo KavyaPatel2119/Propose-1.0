@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" href="https://www.citypng.com/public/uploads/preview/hd-pink-hand-sketch-heart-love-png-735811697025575st8junchot.png" type="image/x-icon">
+  <title>My Love Languages</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #967BB6, #DCD0FF);
+      color: #4B3869;
+      overflow: hidden;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    .container h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3em;
+      text-align: center;
+      background-color: rgba(255, 255, 255, 0.85);
+      margin: 30px auto;
+      padding: 20px;
+      width: 60%;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(115, 79, 150, 0.4);
+      text-shadow: 1px 2px 4px #E6E6FA;
+      z-index: 1;
+      position: relative;
+    }
+
+    .container1 {
+      text-align: center;
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 20px;
+      padding: 30px;
+      width: 60%;
+      margin: 0 auto 30px;
+      box-shadow: 0 8px 16px rgba(115, 79, 150, 0.2);
+      z-index: 1;
+      position: relative;
+    }
+
+    .languagename {
+      font-size: 2em;
+      color: #5A3E8B;
+      font-weight: 500;
+      margin-bottom: 15px;
+    }
+
+    .lancode {
+      background: #F3ECF9;
+      border-left: 5px solid #967BB6;
+      font-family: 'Courier New', monospace;
+      color: #333;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: left;
+      white-space: pre-wrap;
+      min-height: 80px;
+      box-shadow: inset 0 0 10px rgba(115, 79, 150, 0.1);
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 30px;
+      background: #A483C3;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    button:hover {
+      background: #734F96;
+      transform: scale(1.05);
+    }
+
+    /* Rain of love text */
+    .rain {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .drop {
+      position: absolute;
+      color: rgba(255, 255, 255, 0.6);
+      font-family: 'Great Vibes', cursive;
+      font-size: 1.5em;
+      animation: fall linear infinite;
+      white-space: nowrap;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      20% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(110vh);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>My Love for You in Different Languages</h1>
+  </div>
+
+  <div class="container1">
+    <div class="languagename"></div>
+    <div class="lancode"></div>
+    <button id="languageButton">Next Language</button>
+  </div>
+
+  <div class="rain" id="rain"></div>
+
+  <script>
+    const languages = [
+  { name: "Python", code: 'print("I love you Nishita!")' },
+  { name: "JavaScript", code: 'console.log("I love you Nishita!");' },
+  { name: "Java", code: 'System.out.println("I love you Nishita!");' },
+  { name: "C++", code: '#include <iostream>\nusing namespace std;\ncout << "I love you Nishita!" << endl;' },
+  { name: "C", code: '#include <stdio.h>\nint main() {\n    printf("I love you Nishita!\\n");\n    return 0;\n}' },
+  { name: "HTML", code: '<h1>I love you Nishita!</h1>' },
+  { name: "CSS", code: 'body::after { content: "I love you Nishita!"; }' },
+  { name: "TypeScript", code: 'console.log("I love you Nishita!");' },
+  { name: "Swift", code: 'print("I love you Nishita!")' },
+  { name: "Dart", code: 'void main() {\n  print("I love you Nishita!");\n}' },
+  { name: "Objective-C", code: '#import <Foundation/Foundation.h>\nint main() {\n    NSLog(@"I love you Nishita!");\n    return 0;\n}' },
+  { name: "Scala", code: 'object Main extends App {\n  println("I love you Nishita!")\n}' },
+  { name: "Clojure", code: '(println "I love you Nishita!")' },
+  { name: "Elixir", code: 'IO.puts("I love you Nishita!")' },
+  { name: "Erlang", code: 'io:format("I love you Nishita!~n").' },
+  { name: "F#", code: 'printfn "I love you Nishita!"' },
+  { name: "Ruby", code: 'puts "I love you Nishita!"' },
+  { name: "PHP", code: 'echo "I love you Nishita!";' },
+  { name: "Rust", code: 'println!("I love you Nishita!");' },
+  { name: "SQL", code: '-- I love you Nishita!\nSELECT "I love you Nishita!" AS message;' },
+  { name: "C#", code: 'Console.WriteLine("I love you Nishita!");' },
+  { name: "Go", code: 'package main\nimport "fmt"\nfunc main() {\n    fmt.Println("I love you Nishita!")\n}' },
+  { name: "Assembly", code: 'section .data\nmsg db "I love you Nishita!", 0Ah\nsection .text\nglobal _start\n_start:\nmov edx, 21\nmov ecx, msg\nmov ebx, 1\nmov eax, 4\nint 0x80\nmov eax, 1\nint 0x80' },
+  { name: "Kotlin", code: 'fun main() {\n    println("I love you Nishita!")\n}' },
+  { name: "Perl", code: 'print "I love you Nishita!\\n";' },
+  { name: "Bash", code: 'echo "I love you Nishita!"' },
+  { name: "Lua", code: 'print("I love you Nishita!")' },
+  { name: "R", code: 'cat("I love you Nishita!\\n")' },
+  { name: "Haskell", code: 'main = putStrLn "I love you Nishita!"' },
+  { name: "Julia", code: 'main = println("I love you Nishita!")' }
+];
+
+
+    let currentIndex = 0;
+    const languagenameDiv = document.querySelector(".languagename");
+    const lancodeDiv = document.querySelector(".lancode");
+    const button = document.getElementById("languageButton");
+
+    function updateLanguage() {
+      languagenameDiv.textContent = languages[currentIndex].name;
+      lancodeDiv.textContent = languages[currentIndex].code;
+
+      if (currentIndex === languages.length - 1) {
+        button.textContent = "Next Page";
+        
+      }
+    }
+
+    updateLanguage();
+
+    button.addEventListener("click", () => {
+      if (currentIndex < languages.length - 1) {
+        currentIndex++;
+        updateLanguage();
+      } 
+      else {
+        alert("And no matter the language, Nishita… my heart says the same thing:\nI love you 💖💖."); // Popup message
+   
+        window.location.href = "5.html"; // Change this to your next page!
+      }
+    });
+
+    // Rain Effect
+    const rainContainer = document.getElementById('rain');
+    const createDrop = () => {
+      const drop = document.createElement('div');
+      drop.className = 'drop';
+      drop.style.left = Math.random() * 100 + 'vw';
+      drop.style.animationDuration = 5 + Math.random() * 5 + 's';
+      drop.style.fontSize = (1 + Math.random() * 1.5) + 'em';
+      drop.textContent = 'I love you Nishita';
+      rainContainer.appendChild(drop);
+      setTimeout(() => {
+        drop.remove();
+      }, 10000);
+    };
+
+    setInterval(createDrop, 210); // creates a new drop every 200ms
+
+
+  </script>
+</body>
+</html>

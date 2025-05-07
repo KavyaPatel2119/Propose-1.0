@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pehla Pyar</title>
+    <link rel="icon" href="https://www.citypng.com/public/uploads/preview/hd-pink-hand-sketch-heart-love-png-735811697025575st8junchot.png" type="image/x-icon"> 
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Borel&family=Kalam:wght@300;400;700&family=Rouge+Script&display=swap');
+
+        body {
+            background-color: #967BB6;
+            font-family: 'Kalam', cursive;
+            margin: 0;
+            padding: 0;
+        }
+
+        .h1 h1 {
+            background: #573F75;
+            text-align: center;
+            color: aqua;
+            font-family: 'Borel', cursive;
+            padding: 20px;
+            animation: fadeIn 1s ease-in-out;
+            height: 30px;
+            border-radius: 20px;
+            border-color: #573F75;
+            box-shadow: 10px 10px 10px purple;
+            text-shadow: 0 0 10px rgba(255, 20, 147, 0.7);
+        }
+        .h2 h1 {
+            background: #573F75;
+            text-align: center;
+            color: aqua;
+            font-family: 'Borel', cursive;
+            padding: 20px;
+            animation: fadeIn 1s ease-in-out;
+            height: auto;
+            border-radius: 20px;
+            border-color: #573F75;
+            box-shadow: 10px 10px 10px purple;
+            text-shadow: 0 0 10px rgba(255, 20, 147, 0.7);
+        }
+        .h1 h1 {
+            background: #573F75;
+            text-align: center;
+            color: aqua;
+            font-family: 'Borel', cursive;
+            padding: 20px;
+            animation: fadeIn 1s ease-in-out;
+            height: 30px;
+            border-radius: 20px;
+            border-color: #573F75;
+            box-shadow: 10px 10px 10px purple;
+            text-shadow: 0 0 10px rgba(255, 20, 147, 0.7);
+        }
+
+        .img {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px;
+        }
+
+        .flip-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            height: 500px;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .front {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .front img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth pop-up */
+        }
+
+        .front img:hover {
+            transform: scale(1.1) rotate(3deg); /* Pop up with scale and tilt */
+            box-shadow: 0 12px 24px rgba(150, 123, 182, 0.7); /* Stronger lavender shadow */
+        }
+
+
+        p {
+            background: rgba(255, 255, 255, 0.9); 
+            padding: 20px; 
+            border-radius: 10px; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+            font-size: large;
+            font-style: italic;
+            margin: 20px;
+            animation: fadeIn 1s ease-in-out;
+            opacity: 0;
+            animation-fill-mode: forwards;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px;
+        }    
+
+        .next-button {
+            background-color: #D8A3D1;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 20px 40px; 
+            font-size: 24px; 
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .next-button:hover {
+            background-color: #C78BCF;
+            transform: scale(1.1);
+        }
+
+        .next-button:active {
+            background-color: #B76CBF;
+        }
+
+        .clock-container {
+            text-align: center;
+            background: linear-gradient(135deg, rgba(255, 182, 193, 0.9), rgba(138, 43, 226, 0.9));
+            border-radius: 50%;
+            padding: 30px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3), inset 0 0 10px rgba(255, 255, 255, 0.2);
+            position: relative;
+            width: 300px;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 20px auto;
+            animation: fadeIn 1s ease-in-out;
+            border: 2px solid #FFD700;
+        }
+
+        .heart-container {
+            position: absolute;
+            top: -20px;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .heart {
+            font-size: 32px;
+            color: #FF1493;
+            animation: heartbeat 1.2s ease-in-out infinite;
+            margin: 0 8px;
+            text-shadow: 0 0 10px rgba(255, 20, 147, 0.7);
+        }
+
+        .clock {
+            font-size: 36px;
+            color: #FFF;
+            font-family: 'Courier New', monospace;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px 20px;
+            border-radius: 10px;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .message {
+            font-size: 20px;
+            color: #FFD700;
+            margin-top: 15px;
+            font-family: 'Rouge Script', cursive;
+            font-style: italic;
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1) rotate(0deg);
+            }
+            50% {
+                transform: scale(1.3) rotate(5deg);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.03);
+                opacity: 0.9;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="h1">
+        <h1>💖I Love You Nishita!!!💖</h1>
+    </div>
+    <div class="img">
+        <div class="flip-container">
+            <div class="front">
+                <img src="peach6.gif" alt="Nishu">
+            </div>
+        </div>
+    </div>
+    <div class="h2">
+        <h1>Do you Know When and where did I see you for the first time</h1>
+    </div>
+    
+    <div class="loveat1stsight">
+        <p>
+            I first saw you on October 16, 2024, in the D Block Auditorium at around 4:50 PM. That moment is etched in my memory because I fell into your eyes, and I’ve been captivated ever since. I will always be yours. <br><br>The first time I saw you, my lips called you ‘Heer’—maybe by mistake, or maybe because my heart recognized its Ranjha’s destiny.🌙💖
+        </p>
+        <div class="clock-container">
+            <div class="heart-container">
+                <div class="heart">💖</div>
+                <div class="heart">💖</div>
+            </div>
+            <div class="clock" id="clock"></div>
+            <div class="message">Time Since Love Began</div>
+        </div>
+    </div>
+    <div class="img">
+        <div class="flip-container">
+            <div class="front">
+                <img src="peach22.gif" alt="Nishu">
+            </div>
+        </div>
+    </div>
+    <div class="h1">
+        <h1>My Short and Sweet Story</h1>
+    </div>
+    <p>
+        Whenever I see you, you make my heart beat at the speed of an F1 racing car. At first, I didn’t even talk to you, but one day in semester 2 on January 21. That was the first message I received from your number, and it made my heart really happy. My Heart Happily said, “Yes! Nishu’s message has come for the first time!” 
+        <br><br>
+        Later, for the Python assignment answer key, I was attending a wedding. I made the answer key because a message came from my love, so there was no disturbance in my Nishu work. Then I asked you to join the GDG hackathon team, which I had never thought of doing before. We also participated in the pitchathon, and I was so happy to see you in the team. I was really impressed by your pitch. <br> <br>Nishita, I need to tell you something from the deepest part of my heart. What I feel for you isn’t just a crush, or something that will fade away. I truly love you—not in a rushed or dramatic way, but in a pure, honest way. You matter to me so much. I love the way you think, how you smile, how you care. I don't expect anything—just wanted you to know what's in my heart. I hope we can talk about it when you're ready</p>
+    <div class="button-container">
+        <button class="next-button" onclick="next()">Next</button>
+    </div>
+    <script>
+        function next() {
+            window.location.href = "4.html"; // Redirect to the next page
+        }
+
+        function updateClock() {
+            const startDate = new Date('2024-10-16T00:00:00');
+            const now = new Date();
+            const elapsed = now - startDate;
+
+            const days = Math.floor(elapsed / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((elapsed % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((elapsed % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((elapsed % (1000 * 60)) / 1000);
+
+            const clockElement = document.getElementById('clock');
+            clockElement.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        }
+
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
+</body>
+</html>
